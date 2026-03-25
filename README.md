@@ -1,5 +1,5 @@
 <div align="center">
-<img width="1200" height="475" alt="Portfolio Banner" src="https://drive.google.com/file/d/17rktTL_5QxEnBmSq3nrBGRum1veEw3TO/view?usp=sharing" />
+<img width="1200" height="475" alt="Portfolio Banner" src="public/MM Banner.png" />
 </div>
 
 # Mzwandile Majola - Personal Portfolio & Professional Showcase
