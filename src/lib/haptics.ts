@@ -22,11 +22,15 @@ export const haptics = {
    * Light tap feedback for standard button interactions.
    */
   tap: () => {
-    if (!hapticsInstance) return;
+    if (!hapticsInstance) {
+      console.log('[Haptics] No instance available');
+      return;
+    }
     try {
-      hapticsInstance.trigger('selection');
+      console.log('[Haptics] Triggering tap (medium)');
+      hapticsInstance.trigger('medium');
     } catch (e) {
-      // No-op on error
+      console.error('[Haptics] Tap error:', e);
     }
   },
 
@@ -34,11 +38,15 @@ export const haptics = {
    * Success feedback for positive actions (e.g., form submission).
    */
   success: () => {
-    if (!hapticsInstance) return;
+    if (!hapticsInstance) {
+      console.log('[Haptics] No instance available');
+      return;
+    }
     try {
+      console.log('[Haptics] Triggering success');
       hapticsInstance.trigger('success');
     } catch (e) {
-      // No-op on error
+      console.error('[Haptics] Success error:', e);
     }
   },
 
@@ -46,24 +54,49 @@ export const haptics = {
    * Error feedback for negative actions or validation failures.
    */
   error: () => {
-    if (!hapticsInstance) return;
+    if (!hapticsInstance) {
+      console.log('[Haptics] No instance available');
+      return;
+    }
     try {
+      console.log('[Haptics] Triggering error');
       hapticsInstance.trigger('error');
     } catch (e) {
-      // No-op on error
+      console.error('[Haptics] Error feedback error:', e);
     }
   },
 
   /**
-   * Medium impact feedback.
+   * More complex haptic pattern to feel more "premium" (dual-pulse).
    */
-  medium: () => {
+  punchyTap: () => {
     if (!hapticsInstance) return;
     try {
-      hapticsInstance.trigger('medium');
+      console.log('[Haptics] Triggering punchyTap (dual-pulse)');
+      hapticsInstance.trigger({
+        pattern: [
+          { duration: 15, intensity: 1 },
+          { delay: 30, duration: 15, intensity: 0.7 }
+        ]
+      });
     } catch (e) {
-      // No-op on error
+      console.error('[Haptics] PunchyTap error:', e);
+    }
+  },
+
+  /**
+   * Medium/Heavy impact feedback.
+   */
+  heavy: () => {
+
+    if (!hapticsInstance) return;
+    try {
+      console.log('[Haptics] Triggering heavy');
+      hapticsInstance.trigger('heavy');
+    } catch (e) {
+      // No-op
     }
   }
 };
+
 
