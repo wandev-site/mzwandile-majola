@@ -1,8 +1,11 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
+import { haptics } from '../lib/haptics';
 
 export function About() {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [quoteIndex, setQuoteIndex] = useState(0);
+
   const inspirations = [
     "Code is poetry in motion.",
     "Every bug is a feature waiting to be discovered.",
@@ -10,7 +13,13 @@ export function About() {
     "The best code is the one that explains itself.",
     "Dream big, code bigger."
   ];
-  const randomInspiration = inspirations[Math.floor(Math.random() * inspirations.length)];
+
+  const handleImageClick = () => {
+    haptics.punchyTap();
+    setQuoteIndex(prev => (prev + 1) % inspirations.length);
+    setShowTooltip(!showTooltip);
+  };
+
   return (
     <section id="about" className="py-24">
       <div className="container mx-auto px-6">
@@ -25,10 +34,11 @@ export function About() {
               <img 
                 src="https://lh3.googleusercontent.com/d/1gMXx373pBDI4FT0OuVa0THQcXoWLuc4E" 
                 alt="Mzwandile Majola" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer"
                 referrerPolicy="no-referrer"
                 onMouseEnter={() => setShowTooltip(true)}
                 onMouseLeave={() => setShowTooltip(false)}
+                onClick={handleImageClick}
               />
               <AnimatePresence>
                 {showTooltip && (
@@ -39,10 +49,11 @@ export function About() {
                     transition={{ duration: 0.3 }}
                     className="absolute top-[114px] left-1/2 transform -translate-x-1/4 bg-black/80 text-white px-3 py-2 rounded-lg text-sm max-w-xs"
                   >
-                    {randomInspiration}
+                    {inspirations[quoteIndex]}
                   </motion.div>
                 )}
               </AnimatePresence>
+
             </div>
             <div className="absolute -bottom-6 -right-6 w-48 h-48 glass-card p-6 flex flex-col justify-center items-center text-center">
               <span className="text-4xl font-bold text-primary">2+</span>
