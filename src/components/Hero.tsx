@@ -1,5 +1,8 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Mail } from 'lucide-react';
+import { haptics } from '../lib/haptics';
+
+
 
 export function Hero() {
   return (
@@ -41,6 +44,7 @@ export function Hero() {
               <a 
                 href="#projects" 
                 className="flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary/90 transition-all hover:gap-4"
+                onClick={() => haptics.tap()}
               >
                 View My Work
                 <ArrowRight size={20} />
@@ -48,10 +52,12 @@ export function Hero() {
               <a 
                 href="#contact" 
                 className="flex items-center gap-2 px-8 py-4 rounded-full glass text-foreground font-semibold hover:bg-white/10 transition-all"
+                onClick={() => haptics.tap()}
               >
                 <Mail size={20} />
                 Get In Touch
               </a>
+
             </div>
           </motion.div>
         </div>

@@ -2,6 +2,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ExternalLink, Github } from 'lucide-react';
 import { PROJECTS } from '../data/portfolio';
 import { useTransitionNavigate } from '../hooks/useTransitionNavigate';
+import { haptics } from '../lib/haptics';
+
+
 
 export function Projects() {
   const { isTransitioning, navigateWithTransition } = useTransitionNavigate();
@@ -59,9 +62,11 @@ export function Projects() {
               }}
               className="glass-card overflow-hidden group cursor-pointer border border-white/10"
               onClick={() => {
+                haptics.tap();
                 navigateWithTransition(project.link);
                 setTimeout(() => window.location.href = project.link, 300);
               }}
+
             >
               <div className="relative aspect-video overflow-hidden">
                 <img 

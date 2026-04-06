@@ -3,6 +3,9 @@ import { motion } from 'motion/react';
 import { Menu, X, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
+import { haptics } from '../lib/haptics';
+
+
 
 const NAV_ITEMS = [
   { name: 'Home', href: '#home' },
@@ -50,9 +53,16 @@ export function Navbar() {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-foreground" onClick={() => setIsOpen(!isOpen)}>
+        <button 
+          className="md:hidden text-foreground" 
+          onClick={() => {
+            haptics.tap();
+            setIsOpen(!isOpen);
+          }}
+        >
           {isOpen ? <X /> : <Menu />}
         </button>
+
       </div>
 
       {/* Mobile Nav */}

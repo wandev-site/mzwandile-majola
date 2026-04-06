@@ -1,6 +1,10 @@
+import React from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useRef } from 'react';
+import { haptics } from '../lib/haptics';
+
+
 
 export function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -13,8 +17,10 @@ export function Contact() {
     const subject = formData.get('subject') as string;
     const message = formData.get('message') as string;
     const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    haptics.success();
     window.location.href = `mailto:wandev.site@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
+
   return (
     <section id="contact" className="py-24 bg-primary/5">
       <div className="container mx-auto px-6">
@@ -68,16 +74,16 @@ export function Contact() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground/60">Full Name</label>
-                  <input type="text" name="name" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary outline-none transition-colors" placeholder="John Doe" required />
+                  <input type="text" name="name" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary outline-none transition-colors" placeholder="John Doe" required onInvalid={() => haptics.error()} />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground/60">Email Address</label>
-                  <input type="email" name="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary outline-none transition-colors" placeholder="john@example.com" required />
+                  <input type="email" name="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary outline-none transition-colors" placeholder="john@example.com" required onInvalid={() => haptics.error()} />
                 </div>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground/60">Subject</label>
-                <select name="subject" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary outline-none transition-colors" required>
+                <select name="subject" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary outline-none transition-colors" required onInvalid={() => haptics.error()}>
                   <option value="General Inquiry">General Inquiry</option>
                   <option value="Website Development">Website Development</option>
                   <option value="Web Application Development">Web Application Development</option>
@@ -92,7 +98,8 @@ export function Contact() {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground/60">Message</label>
-                <textarea name="message" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary outline-none transition-colors" placeholder="Tell me about your project..." required></textarea>
+                <textarea name="message" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary outline-none transition-colors" placeholder="Tell me about your project..." required onInvalid={() => haptics.error()}></textarea>
+
               </div>
               <button className="w-full py-4 bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-primary/90 transition-all">
                 Send Message
