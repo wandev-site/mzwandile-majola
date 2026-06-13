@@ -28,13 +28,14 @@ export const SKILLS = [
 
 export const PROJECTS = [
   {
-    id: "wandev",
-    title: "WanDev",
-    description: "High-quality WordPress and React templates for developers, agencies, and freelancers.",
-    longDescription: "High-quality WordPress and React templates for developers, agencies, and freelancers who value clean code and exceptional design.",
-    tech: ["WordPress", "React", "Template Design", "E-commerce"],
-    image: "/WanDev.PNG",
-    link: "https://wan-dev.vercel.app"
+    id: "inkechoes",
+    title: "Ink & Echoes",
+    description: "A modern literary journal dedicated to poetry, reflections, and timeless written works.",
+    longDescription: "Ink & Echoes is a digital literary journal that celebrates poetry, storytelling, and thoughtful reflections. Discover original poems, curated collections, and writings that explore love, life, faith, loss, memory, and the human experience through carefully crafted words.",
+    tech: ["Poetry", "Literary Journal", "Creative Writing", "Digital Publishing"],
+    image: "/Ink & Echoes.JPG",
+    link: "https://inkechoes.vercel.app/"
+
   },
   {
     id: "netapps",
